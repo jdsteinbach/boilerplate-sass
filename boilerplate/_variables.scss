@@ -1,0 +1,10 @@
+$max-width: 1200px;
+$grid-columns: 16;
+$gutter: 1em;
+$em-base: 16px;
+
+$breakpoints: (
+	small: 480px,
+	medium: 720px,
+	large: 1024px
+);
