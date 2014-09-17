@@ -16,24 +16,10 @@
 	#{$property}: $pxValues;
 	#{$property}: $remValues;
 }
-// @mixin fs($number) {
-// 	@include px-rem(font-size, $number);
-// }
-
-@mixin width-height($x...) {
-	@if length($x) == 1 {
-		@include px-rem(width,nth($x,1));
-		@include px-rem(height,nth($x,1));
-	} @else {
-		@include px-rem(width,nth($x,1));
-		@include px-rem(height,nth($x,2));
-	}
+@mixin fs($number) {
+	@include px-rem(font-size, $number);
 }
 
-@mixin size($width, $height: $width) {
-      width: $width;
-      height: $height;
-}
 
 @mixin center($hz,$vt) {
 	.csstransforms & {
@@ -49,22 +35,6 @@
 			top: 50%;
 			@include transform(translateY(-50%));
 		}
-	}
-}
-@mixin placeholder() {
-	::-webkit-input-placeholder {
-		@content;
-	}
-	:-moz-placeholder {
-		@content;
-
-	}
-	::-moz-placeholder {
-		@content;
-	}
-
-	:-ms-input-placeholder {
-		@content;
 	}
 }
 
@@ -87,7 +57,7 @@
 }
 
 @mixin bp($name) {
-	@if not index(map-keys($breakpoints), $name) {
+	@if not map-has-keys($breakpoints), $name) {
 		@warn "Invalid breakpoint `#{$name}`.";
 	}
 	@else {
