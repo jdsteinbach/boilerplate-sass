@@ -1,3 +1,5 @@
+$in_mq: false !global;
+
 @mixin px-rem($property, $values...) {
 	$pxValues: ();
 	$remValues: ();
@@ -12,56 +14,71 @@
 			$remValues: append($remValues, rem($val) );
 		}
 	}
-
-	#{$property}: $pxValues;
+	@if $in_mq = false {
+		#{$property}: $pxValues;
+	}
 	#{$property}: $remValues;
 }
 @mixin fs($number) {
 	@include px-rem(font-size, $number);
 }
 
-
-@mixin center($hz,$vt) {
+@mixin center($hz:true,$vt:true) {
 	.csstransforms & {
 		position: relative;
-		@if $hz == 'hz' and $vt == 'vt' {
+		@if $hz == true and $vt == true {
 			top: 50%;
 			left: 50%;
-			@include transform(translateX(-50%) translateY(-50%));
-		} @else if $hz == 'hz' {
+			transform: translateX(-50%) translateY(-50%);
+		} @else if $hz == true {
 			left: 50%;
-			@include transform(translateX(-50%));
-		} @else if $vt == 'vt' {
+			transform: translateX(-50%);
+		} @else if $vt == true {
 			top: 50%;
-			@include transform(translateY(-50%));
+			transform: translateY(-50%);
 		}
 	}
 }
 
-@mixin hide($bp) {
-	@if $bp == all {
-		display: none;
-		width: 0;
-		height: 0;
-		overflow: hidden;
-		clip: rect(0,0,0,0);
+@mixin hide($bp, $reset: null) {
+	@if $reset {
+		@include bp($bp) {
+			display: block;
+			width: auto;
+			height: auto;
+			overflow: auto;
+			clip: none;
+		}
 	} @else {
-		@include breakpoint($bp) {
+		@if $bp == all {
 			display: none;
 			width: 0;
 			height: 0;
 			overflow: hidden;
 			clip: rect(0,0,0,0);
+		} @else {
+			@include bp($bp) {
+				display: none;
+				width: 0;
+				height: 0;
+				overflow: hidden;
+				clip: rect(0,0,0,0);
+			}
 		}
 	}
 }
 
 @mixin bp($name) {
-	@if not map-has-keys($breakpoints), $name) {
+	@if not map-has-key($breakpoints, $name) {
 		@warn "Invalid breakpoint `#{$name}`.";
-	}
-	@else {
-		@media (min-width: map-get($breakpoints, $name)) {
+	} @else {
+		@if map-get($breakpoints, $name) {
+			$in_mq: true !global;
+			@media (min-width: map-get($breakpoints, $name)) {
+				@content;
+			}
+			$in_mq: false !global;
+		} @else {
 			@content;
 		}
 	}
