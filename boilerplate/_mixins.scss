@@ -173,3 +173,26 @@ $in_mq: false !global;
 	}
 }
 
+@function color-variation($color, $variation: false) {
+  @if map-has-key($colors, $color) {
+    $color: map-get($colors, $color);
+  } @else {
+    @if type-of($color) != color {
+      @error "Invalid color name: `#{$color}`.";
+    }
+  }
+
+  @if $variation {
+    @if not map-has-key($variations, $variation) {
+      @error "Invalid $variation: `#{$variation}`.";
+    } @else {
+      $this-variation: map-get($variations, $variation);
+      $args: join(map-get($this-variation, function), $color);
+      @if map-get($this-variation, parameters) {
+        $args: join($args, map-get($this-variation, parameters));
+      }
+      @return call($args...);
+    }
+  }
+  @return $color;
+}
