@@ -98,9 +98,20 @@ $in_mq: false !global;
 	}
 }
 
-@mixin bonus-susy-breakpoint($size, $cols) {
-	$min-width: map-get($size, min-width);
-	@include susy-breakpoint($min-width, $size) {
-		@include span($cols);
-	}
+@mixin bonus-susy-breakpoint($size, $cols, $grid: false) {
+  @if map-get($size, min-width) == null {
+    @error "The map you've specified does not have a min-width value.";
+  } @else {
+    $min-width: map-get($size, min-width);
+    @include susy-breakpoint($min-width, $size) {
+      @if $cols == container {
+        @include container;
+        @if $grid == true {
+          @include show-grid;
+        }
+      } @else {
+        @include span($cols);
+      }
+    }
+  }
 }
