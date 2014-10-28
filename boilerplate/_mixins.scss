@@ -69,7 +69,7 @@ $in_mq: false !global;
 }
 
 @mixin bp($name) {
-	@if not map-has-key($breakpoints, $name) {
+	@if map-has-key($breakpoints, $name) == null {
 		@warn "Invalid breakpoint `#{$name}`.";
 	} @else {
 		@if map-get($breakpoints, $name) {
