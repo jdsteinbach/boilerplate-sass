@@ -36,6 +36,10 @@ $in_mq: false !global;
 	@include px-rem(font-size, $number);
 }
 
+/* CENTER Mixin */
+
+// Use CSS transforms to center elements horizontally & vertically
+// I never use it so w/e
 @mixin center($hz:true,$vt:true) {
 	.csstransforms & {
 		position: relative;
