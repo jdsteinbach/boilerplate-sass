@@ -169,16 +169,16 @@ $in_mq: false !global;
 			}
 		}
 	} @else {
-		@warn "You need as many values as there are breakpoints for this mixin."
+		@warn 'You need as many values as there are breakpoints for this mixin.';
 	}
 }
 
 @function color-variation($color, $variation: false) {
-  @if map-has-key($colors, $color) {
+  @if map-has-key($colors, $color) != null {
     $color: map-get($colors, $color);
   } @else {
     @if type-of($color) != color {
-      @error "Invalid color name: `#{$color}`.";
+      @error "Invalid color name: #{$color}.";
     }
   }
 
