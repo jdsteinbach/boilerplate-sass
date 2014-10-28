@@ -119,3 +119,35 @@ $in_mq: false !global;
 @function round-num($num) {
 	@return round($num*100)/100;
 }
+
+@mixin spread-value($property, $value-start, $value-end, $bp-start: small, $bp-end: large) {
+	@if type-of($value-start) != number or type-of($value-end) != number {
+		@warn 'Either $value-start or $value-end is not a number: `#{$value-start}` | `#{$value-end}';
+	} @else {
+		@if $property == font-size {
+			@include fs($value-start);
+		} @else {
+			#{$property}: #{$value-start};
+		}
+		$value-distance: $value-end - $value-start;
+		$bp-distance: get_bp($bp-end) - get_bp($bp-start);
+		$bp-keys: map-keys($breakpoints);
+		$bp-list: ();
+		$i: index($bp-keys, $bp-start);
+		@while $i <= length($bp-keys) and nth($bp-keys, $i) != $bp-end {
+			$i: $i + 1;
+			$bp-list: join($bp-list, nth($bp-keys, $i));
+		}
+		@each $key in $bp-list {
+			$percentage: ( get-bp($key) - get_bp($bp-start) ) / $bp-distance;
+			$output: round-num( ( $value-distance * $percentage ) + $value-start );
+			@include breakpoint($key) {
+				@if $property == font-size {
+					@include fs($output);
+				} @else {
+					#{$property}: #{$output};
+				}
+			}
+		}
+	}
+}
