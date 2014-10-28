@@ -9,14 +9,17 @@ $breakpoints: (
 	large: 1024px
 );
 
+
+/* SUSY SUPPORT */
+
 $susy: (
 	columns: 1,
 	gutter: 0,
-	debug: (
-		image: show,
-		color: rgba(orange, .25),
-		output: background
-	)
+	// debug: (
+	// 	image: show,
+	// 	color: rgba(orange, .25),
+	// 	output: background
+	// )
 );
 
 $small: (
