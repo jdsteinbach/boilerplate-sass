@@ -54,3 +54,25 @@ $colors: (
   yellow: #ffdc00,
   orange: #ff851b
 );
+
+$variations: (
+  light: (
+    function: lighten,
+    parameters: 15%
+  ),
+  dark: (
+    function: darken,
+    parameters: 10%
+  ),
+  fade: (
+    function: rgba,
+    parameters: .7
+  ),
+  gray: (
+    function: grayscale
+  ),
+  shade: (
+    function: mix,
+    parameters: white 80%
+  )
+);
