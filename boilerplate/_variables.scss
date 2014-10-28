@@ -1,7 +1,11 @@
+/* NEAT SUPPORT */
+
 $max-width: 1200px;
 $grid-columns: 16;
 $gutter: 1em;
 $em-base: 16px;
+
+/* MY BREAKPOINT MIXIN */
 
 $breakpoints: (
 	small: 480px,
