@@ -171,6 +171,15 @@ $in-mq: false !global;
 	@return round($num*100)/100;
 }
 
+/* SPREAD-VALUE Mixin */
+
+// Spreads values proportionally across breakpoints in $breakpoints map
+// - $property: CSS property name
+// - $value-start: initial (smallest breakpoint) value
+// - $value-end: final (larges breakpoint) value
+// - $bp-start: breakpoint to begin spreading from (default small)
+// - $bp-end: breakpoint to stop spreading at (default large);
+
 @mixin spread-value($property, $value-start, $value-end, $bp-start: small, $bp-end: large) {
 	@if type-of($value-start) != number or type-of($value-end) != number {
 		@warn 'Either $value-start or $value-end is not a number: `#{$value-start}` | `#{$value-end}';
