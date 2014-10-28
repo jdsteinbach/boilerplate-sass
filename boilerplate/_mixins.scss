@@ -1,3 +1,14 @@
+/* PX-REM Mixin */
+
+// $in-mq is used to detect if mixin is being called inside a
+//   media query. If so, no px fallback is needed.
+// Mixin takes two parameters:
+// - $property: CSS property name
+// - $values: list of pixel values for shorthand (like margin / padding)
+// Foreach $value, mixin strips unit, converts to rem and
+//   adds both px & rem values to appropriate lists
+// Only outputs $pxValues if (1) not in MQ and (2) lists actually differ
+// Outputs $remValues
 $in_mq: false !global;
 
 @mixin px-rem($property, $values...) {
@@ -14,7 +25,7 @@ $in_mq: false !global;
 			$remValues: append($remValues, rem($val) );
 		}
 	}
-	@if $in_mq = false {
+	@if $in_mq = false and $pxValues != $remValues {
 		#{$property}: $pxValues;
 	}
 	#{$property}: $remValues;
