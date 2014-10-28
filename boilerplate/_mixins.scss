@@ -112,6 +112,10 @@ $in-mq: false !global;
 	}
 }
 
+/* FSMOOTH Mixin */
+
+// If $yes != no, outputs Chrome & Firefox (Mac) antialiasing
+// If $yes = no, resets to default subpixel-antialiasing
 @mixin fsmooth($yes: yes) {
 	@if $yes == 'no' {
 		-webkit-font-smoothing: subpixel-antialiased;
