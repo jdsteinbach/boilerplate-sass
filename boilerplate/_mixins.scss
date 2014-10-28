@@ -9,7 +9,7 @@
 //   adds both px & rem values to appropriate lists
 // Only outputs $pxValues if (1) not in MQ and (2) lists actually differ
 // Outputs $remValues
-$in_mq: false !global;
+$in-mq: false !global;
 
 @mixin px-rem($property, $values...) {
 	$pxValues: ();
@@ -25,7 +25,7 @@ $in_mq: false !global;
 			$remValues: append($remValues, rem($val) );
 		}
 	}
-	@if $in_mq = false and $pxValues != $remValues {
+	@if $in-mq = false and $pxValues != $remValues {
 		#{$property}: $pxValues;
 	}
 	#{$property}: $remValues;
@@ -94,18 +94,18 @@ $in_mq: false !global;
 
 // Generate min-width media queries from $breakpoints map data
 // - $name: key from $breakpoints
-// Switches $in_mq on & off for px-rem() mixin
+// Switches $in-mq on & off for px-rem() mixin
 // Output content wrapped in MQ
 @mixin bp($name) {
 	@if map-has-key($breakpoints, $name) == null {
 		@warn "Invalid breakpoint `#{$name}`.";
 	} @else {
 		@if map-get($breakpoints, $name) {
-			$in_mq: true !global;
+			$in-mq: true !global;
 			@media (min-width: map-get($breakpoints, $name)) {
 				@content;
 			}
-			$in_mq: false !global;
+			$in-mq: false !global;
 		} @else {
 			@content;
 		}
