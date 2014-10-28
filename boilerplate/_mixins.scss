@@ -164,6 +164,9 @@ $in-mq: false !global;
 	@return map-get($breakpoints, $label);
 }
 
+/* ROUND-NUM Function */
+
+// Rounds a number to the nearest hundredth
 @function round-num($num) {
 	@return round($num*100)/100;
 }
