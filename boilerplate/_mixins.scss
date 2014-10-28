@@ -181,14 +181,13 @@ $in_mq: false !global;
 			@warn "Invalid color name: #{$color}.";
 		}
 	}
-
 	@if $variation {
-		@if not map-has-key($variations, $variation) {
+		@if map-has-key($variations, $variation) == null {
 			@warn "Invalid $variation: `#{$variation}`.";
 		} @else {
 			$this-variation: map-get($variations, $variation);
 			$args: join(map-get($this-variation, function), $color);
-			@if map-get($this-variation, parameters) {
+			@if map-get($this-variation, parameters) != null {
 				$args: join($args, map-get($this-variation, parameters));
 			}
 			@return call($args...);
