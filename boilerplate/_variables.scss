@@ -25,6 +25,10 @@ $small: (
 	gutters: .125
 );
 
-$medium: ();
+$medium: (
+	min-width: 720px,
+	columns: 6,
+	gutters: .25
+);
 
 $large: ();
