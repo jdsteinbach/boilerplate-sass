@@ -151,3 +151,24 @@ $in_mq: false !global;
 		}
 	}
 }
+
+@mixin no-spread-value($property, $values...) {
+	@if $property == font-size {
+		@include fs(nth($values, 1));
+	} @else {
+		#{$property}: nth($values, 1);
+	}
+	@if length($values) == length(map-keys($breakpoints)) {
+		@each $key in $bp-keys {
+			@include breakpoint($key) {
+				@if $property == font-size {
+					@include fs(nth($values, index($bp-keys, $key)));
+				} @else {
+					#{$property}: nth($values, index($bp-keys, $key));
+				}
+			}
+		}
+	} @else {
+		@warn "You need as many values as there are breakpoints for this mixin."
+	}
+}
