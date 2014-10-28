@@ -31,4 +31,9 @@ $medium: (
 	gutters: .25
 );
 
-$large: ();
+$large: (
+	min-width: 1024px,
+	container: 1024px,
+	columns: 12,
+	gutters: .33
+);
