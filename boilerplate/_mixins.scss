@@ -160,7 +160,7 @@ $in-mq: false !global;
 /* GET_BP Function */
 
 // Shorthand for map-get function on the $breakpoints map
-@function get_bp($label) {
+@function get-bp($label) {
 	@return map-get($breakpoints, $label);
 }
 
@@ -181,7 +181,7 @@ $in-mq: false !global;
 			#{$property}: #{$value-start};
 		}
 		$value-distance: $value-end - $value-start;
-		$bp-distance: get_bp($bp-end) - get_bp($bp-start);
+		$bp-distance: get-bp($bp-end) - get-bp($bp-start);
 		$bp-keys: map-keys($breakpoints);
 		$bp-list: ();
 		$i: index($bp-keys, $bp-start);
@@ -190,7 +190,7 @@ $in-mq: false !global;
 			$bp-list: join($bp-list, nth($bp-keys, $i));
 		}
 		@each $key in $bp-list {
-			$percentage: ( get-bp($key) - get_bp($bp-start) ) / $bp-distance;
+			$percentage: ( get-bp($key) - get-bp($bp-start) ) / $bp-distance;
 			$output: round-num( ( $value-distance * $percentage ) + $value-start );
 			@include breakpoint($key) {
 				@if $property == font-size {
