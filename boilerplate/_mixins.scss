@@ -179,7 +179,6 @@ $in-mq: false !global;
 // - $value-end: final (larges breakpoint) value
 // - $bp-start: breakpoint to begin spreading from (default small)
 // - $bp-end: breakpoint to stop spreading at (default large);
-
 @mixin spread-value($property, $value-start, $value-end, $bp-start: small, $bp-end: large) {
 	@if type-of($value-start) != number or type-of($value-end) != number {
 		@warn 'Either $value-start or $value-end is not a number: `#{$value-start}` | `#{$value-end}';
@@ -212,6 +211,11 @@ $in-mq: false !global;
 	}
 }
 
+/* NO-SPREAD-VALUE Mixin */
+
+// Manually specify a series of values to be used across breakpoints in $breakpoints map
+// - $property: CSS property name
+// - $values: list of values (length must match length of $breakpoints map)
 @mixin no-spread-value($property, $values...) {
 	@if $property == font-size {
 		@include fs(nth($values, 1));
