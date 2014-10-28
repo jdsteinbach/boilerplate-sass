@@ -30,6 +30,8 @@ $in_mq: false !global;
 	}
 	#{$property}: $remValues;
 }
+
+// Shorthand mixin to make using px-rem for font-size easier
 @mixin fs($number) {
 	@include px-rem(font-size, $number);
 }
