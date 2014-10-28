@@ -57,6 +57,11 @@ $in_mq: false !global;
 	}
 }
 
+/* HIDE Mixin */
+
+// Bullet proof way to hide elements from breakpoint
+// - $bp: key from $breakpoints map
+// - $reset: reverses previous of mixin
 @mixin hide($bp, $reset: null) {
 	@if $reset {
 		@include bp($bp) {
