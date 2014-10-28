@@ -101,12 +101,12 @@ $in_mq: false !global;
 //   in current mq context
 // $grid is option: if true, calls show-grid() in current mq context
 
-@mixin bonus-susy-breakpoint($size, $cols, $grid: false) {
-  @if map-get($size, min-width) == null {
-    @error 'The map you specified does not have a min-width value.';
+@mixin bonus-susy-breakpoint($config, $cols, $grid: false) {
+  @if map-get($config, breakpoint) == null {
+    @warn 'The map you specified does not have a breakpoint value.';
   } @else {
-    $min-width: map-get($size, min-width);
-    @include susy-breakpoint($min-width, $size) {
+    $breakpoint: map-get($config, breakpoint);
+    @include susy-breakpoint($breakpoint, $config) {
       @if $cols == container {
         @include container;
         @if $grid == true {
