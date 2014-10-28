@@ -97,3 +97,10 @@ $in_mq: false !global;
 		-moz-osx-font-smoothing: antialiased;
 	}
 }
+
+@mixin bonus-susy-breakpoint($size, $cols) {
+	$min-width: map-get($size, min-width);
+	@include susy-breakpoint($min-width, $size) {
+		@include span($cols);
+	}
+}
