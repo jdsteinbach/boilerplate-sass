@@ -126,13 +126,15 @@ $in-mq: false !global;
 	}
 }
 
-// $config is a susy config map, I've added 'breakpoint' key:
-//   breakpoint takes a list that fits into breakpoint() mixin.
-// $cols takes a value that matches Susy's span, location, layout pattern,
-//   or $cols takes the word 'container' to call @include container in
-//   in current mq context
-// $grid is option: if true, calls show-grid() in current mq context
+/* SIMPLE-SUSY-BREAKPOINT Mixin */
 
+// Submitted to Susy: https://github.com/ericam/susy/pull/397
+// Shorten mixin syntax & add `breakpoint` value to $susy maps
+// - $config    : a valid $susy config map
+// - $columns   : either a value/list that's valid for span() mixin, or the word 'container'
+// - $grid      : if true, calls show-grid() mixin if $columns == container
+// Also, this would require a `breakpoint` value in the $config map:
+//   That value would be any valid breakpoint() value/list.
 @mixin simple-susy-breakpoint(
 	$config,
 	$columns,
