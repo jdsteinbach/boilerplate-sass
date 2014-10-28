@@ -94,6 +94,13 @@ $in_mq: false !global;
 	}
 }
 
+// $config is a susy config map, I've added 'breakpoint' key:
+//   breakpoint takes a list that fits into breakpoint() mixin.
+// $cols takes a value that matches Susy's span, location, layout pattern,
+//   or $cols takes the word 'container' to call @include container in
+//   in current mq context
+// $grid is option: if true, calls show-grid() in current mq context
+
 @mixin bonus-susy-breakpoint($size, $cols, $grid: false) {
   @if map-get($size, min-width) == null {
     @error 'The map you specified does not have a min-width value.';
