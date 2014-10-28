@@ -6,7 +6,7 @@ $in_mq: false !global;
 
 	@each $value in $values {
 		$val: strip-units($value);
-		@if not not index("initial" "inherit" "auto" 0, $value) {
+		@if index("initial" "inherit" "auto" 0, $value) != null {
 			$pxValues: append($pxValues, $val);
 			$remValues: append($remValues, $val);
 		} @else {
