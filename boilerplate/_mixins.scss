@@ -237,6 +237,13 @@ $in-mq: false !global;
 	}
 }
 
+/* COLOR-VARIATION Function */
+
+// Function to standardize variations on a set of theme colors
+// - $color: key from $colors map
+// - $variation: key from $variations map
+// Function dynamically generates & calls a SassScript color function (found in $variations)
+//   to the color called from $colors
 @function color-variation($color, $variation: false) {
 	@if map-has-key($colors, $color) != null {
 		$color: map-get($colors, $color);
