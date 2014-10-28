@@ -90,6 +90,12 @@ $in_mq: false !global;
 	}
 }
 
+/* BP Mixin (breakpoints) */
+
+// Generate min-width media queries from $breakpoints map data
+// - $name: key from $breakpoints
+// Switches $in_mq on & off for px-rem() mixin
+// Output content wrapped in MQ
 @mixin bp($name) {
 	@if map-has-key($breakpoints, $name) == null {
 		@warn "Invalid breakpoint `#{$name}`.";
