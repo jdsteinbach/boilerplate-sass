@@ -19,7 +19,11 @@ $susy: (
 	)
 );
 
-$small: ();
+$small: (
+	min-width: 480px,
+	columns: 2,
+	gutters: .125
+);
 
 $medium: ();
 
