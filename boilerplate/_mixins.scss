@@ -101,23 +101,28 @@ $in_mq: false !global;
 //   in current mq context
 // $grid is option: if true, calls show-grid() in current mq context
 
-@mixin bonus-susy-breakpoint($config, $cols, $grid: false) {
-  @if map-get($config, breakpoint) == null {
-    @warn 'The map you specified does not have a breakpoint value.';
-  } @else {
-    $breakpoint: map-get($config, breakpoint);
-    @include susy-breakpoint($breakpoint, $config) {
-      @if $cols == container {
-        @include container;
-        @if $grid == true {
-          @include show-grid;
-        }
-      } @else {
-        @include span($cols);
-      }
-    }
-  }
+@mixin simple-susy-breakpoint(
+	$config,
+	$columns,
+	$grid: false
+) {
+	@if map-get($config, breakpoint) == null {
+		@warn 'The map you specified does not have a breakpoint value.';
+	} @else {
+		$breakpoint: map-get($config, breakpoint);
+		@include susy-breakpoint($breakpoint, $config) {
+			@if $columns == container {
+				@include container;
+				@if $grid == true {
+					@include show-grid;
+				}
+			} @else {
+				@include span($columns);
+			}
+		}
+	}
 }
+
 
 @function get_bp($label) {
 	@return map-get($breakpoints, $label);
