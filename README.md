@@ -1,4 +1,3 @@
-boilerplate-sass
-================
+#boilerplate-sass
 
-The Idea People boilerplate Sass partials
+Some boilerplate Sass partials
