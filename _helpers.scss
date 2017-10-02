@@ -1,0 +1,20 @@
+.screen-reader-text {
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+
+  &.skip-link:focus {
+    background-color: $action-color;
+    color: $color-white;
+    font-weight: bold;
+    height: auto;
+    left: 0;
+    padding: $small-spacing $base-spacing;
+    position: fixed;
+    text-transform: lowercase;
+    top: 0;
+    width: auto;
+    z-index: 99;
+  }
+}

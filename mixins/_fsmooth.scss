@@ -1,0 +1,9 @@
+@mixin fsmooth( $smooth: true ) {
+  @if $smooth {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: antialiased;
+  } @else {
+    -webkit-font-smoothing: initial;
+    -moz-osx-font-smoothing: initial;
+  }
+}

@@ -1,0 +1,26 @@
+/*
+ * Font Families
+ */
+$base-font-family:      AvenirCT, Helvetica, sans-serif;
+$secondary-font-family: Palatino Linotype, Palatino, serif;
+$body-font-family:      $base-font-family;
+$heading-font-family:   $body-font-family;
+
+/*
+ * Font Sizes
+ */
+$base-font-size: 16px;
+
+// Line height
+$base-line-height:    1.5;
+$heading-line-height: 1.2;
+
+$font-sizes: (
+  p: (14px 18px, 22px 28px),
+  p2: (14px 18px, 16px 20px),
+  nav: (20px 20px, false),
+  h1: (24px 30px, 48px 54px),
+  h2: (16px 20px, 20px 26px),
+  h3: (16px 20px, 20px 26px),
+  h4: (20px 30px, 36px 40px)
+);

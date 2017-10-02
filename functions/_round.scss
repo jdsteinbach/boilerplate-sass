@@ -1,0 +1,11 @@
+/*
+ * Round-Num Function
+ *
+ * $number: number to round
+ * $places: number of decimal places
+ * Rounds a number to the nearest specified decimal place
+ */
+@function round-num($number, $places: 2) {
+  $places: power(10, $places);
+  @return round($number * $places) / $places;
+}

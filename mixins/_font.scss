@@ -1,0 +1,32 @@
+/*
+ * Creates responsive font-size & line-height declarations
+ */
+
+@mixin _size-height( $size: false, $height: false ) {
+  @if ( $size ) {
+    font-size: $size;
+
+    @if ( $height ) {
+      line-height: strip-units($height) / strip-units($size);
+    }
+  }
+}
+
+@mixin _generate-font( $default, $large: false ) {
+  @include _size-height( $default... );
+
+  @if ( $large ) {
+    @include bp( medium ) {
+      @include _size-height( $large... );
+    }
+  }
+}
+
+@mixin font( $label ) {
+  @if map-has-key( $font-sizes, $label ) {
+    $sizes: mag-get( $font-sizes, $label );
+    @include _generate_font( $sizes... );
+  } @else {
+    @warn 'Font size #{$label} doesn’t exist.';
+  }
+}

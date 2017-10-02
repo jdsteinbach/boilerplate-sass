@@ -1,0 +1,35 @@
+/*
+ * COLOR-VARIATION Function
+ *
+ * Function to standardize variations on a set of theme colors
+ * $color: key from $colors map
+ * $variation: key from $variations map
+ *
+ * Function dynamically generates & calls a SassScript color function (found in $variations) to the color called from $colors
+*/
+@function color-variation( $color, $variation: false ) {
+  @if map-has-key( $colors, $color ) {
+    $color: map-get( $colors, $color );
+  } @else {
+    @if type-of( $color ) != color {
+      @warn "Invalid color name: #{$color}.";
+    }
+  }
+  @if $variation {
+    @if map-has-key( $variations, $variation ) == null {
+      @warn "Invalid $variation: `#{$variation}`.";
+    } @else {
+      $this-variation: map-get( $variations, $variation );
+      $args: join( map-get( $this-variation, function ), $color );
+      @if map-has-key( $this-variation, parameters) {
+        $args: join( $args, map-get( $this-variation, parameters ) );
+      }
+      @return call( $args... );
+    }
+  }
+  @return $color;
+}
+
+@function c( $color, $variation: false ) {
+  @return color-variation( $color, $variation );
+}

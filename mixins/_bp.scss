@@ -1,0 +1,23 @@
+/*
+ * Alias Mixin for BP Sass
+ */
+
+@mixin bp( $query, $direction: min ) {
+  @if type-of( $query ) != 'number' {
+    @if map-has-key( $tweakpoints, $query ) {
+      $query: map-get( $tweakpoints, $query );
+    } @else if map-has-key( $breakpoints, $query ) {
+      $query: map-get( $breakpoints, $query );
+    }
+  }
+
+  @if $direction == max {
+    $query: max-width ($query - 1);
+  }
+
+  @if $query {
+    @include breakpoint( $query ) {
+      @content;
+    }
+  }
+}

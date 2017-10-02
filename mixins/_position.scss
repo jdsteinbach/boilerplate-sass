@@ -1,0 +1,33 @@
+@function expand-shorthand($values) {
+  @if length($values) == 1 {
+    $values: (nth($values, 1), nth($values, 1));
+  }
+
+  @if length($values) == 2 {
+    $values: (nth($values, 1), nth($values, 2), nth($values, 1), nth($values, 2));
+  }
+
+  @if length($values) == 3 {
+    $values: (nth($values, 1), nth($values, 2), nth($values, 3), nth($values, 2));
+  }
+
+  @return $values;
+}
+
+@mixin trbl($values) {
+  $values:     expand-shorthand($values);
+  $directions: top, right, bottom, left;
+
+  @for $i from 1 through length($directions) {
+    @if nth($values, $i) {
+      #{nth($directions, $i)}: nth($values, $i);
+    }
+  }
+}
+
+@mixin position($position: false, $values: ()) {
+  @if $position {
+    position: $position;
+    @include trbl($values);
+  }
+}

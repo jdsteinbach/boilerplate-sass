@@ -1,0 +1,28 @@
+// =========================================================================
+//  PRECISE CONTROL OVER RESPONSIVE TYPOGRAPHY FOR SASS
+//  ---------------------------------------------------
+//  Modified from Indrek Paas @indrekpaas
+//  https://gist.github.com/indrekpaas/7f22e44ace49b5124eec
+//
+//  Inspired by Mike Riethmuller's Precise control over responsive typography
+//  http://madebymike.com.au/writing/precise-control-responsive-typography/
+//
+// =========================================================================
+
+@mixin fluid($properties, $min-bp, $max-bp, $min-value, $max-value) {
+  @each $property in $properties {
+    // #{$property}: $min-value;
+  }
+
+  @include bp($min-bp) {
+    @each $property in $properties {
+      #{$property}: calc(#{$min-value} + #{strip-units($max-value - $min-value)} * (100vw - #{map-get($breakpoints, $min-bp)}) / #{strip-units(map-get($breakpoints, $max-bp) - map-get($breakpoints, $min-bp))});
+    }
+  }
+
+  @include bp($max-bp) {
+    @each $property in $properties {
+      #{$property}: $max-value;
+    }
+  }
+}
