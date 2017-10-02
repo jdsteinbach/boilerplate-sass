@@ -1,0 +1,65 @@
+/* SPREAD-VALUE Mixin
+ * Spreads values proportionally across breakpoints in $breakpoints map
+ * - $property: CSS property name
+ * - $value-start: initial (smallest breakpoint) value
+ * - $value-end: final (larges breakpoint) value
+ * - $bp-start: breakpoint to begin spreading from (default small)
+ * - $bp-end: breakpoint to stop spreading at (default large);
+ */
+@mixin spread-value($property, $value-start, $value-end, $bp-start: small, $bp-end: large) {
+  @if type-of($value-start) != number or type-of($value-end) != number {
+    @warn 'Either $value-start or $value-end is not a number: `#{$value-start}` | `#{$value-end}';
+  } @else {
+    @if $property == font-size {
+      @include fs($value-start);
+    } @else {
+      #{$property}: #{$value-start};
+    }
+    $value-distance: $value-end - $value-start;
+    $bp-distance: get-bp($bp-end) - get-bp($bp-start);
+    $bp-keys: map-keys($breakpoints);
+    $bp-list: ();
+    $i: index($bp-keys, $bp-start);
+    @while $i <= length($bp-keys) and nth($bp-keys, $i) != $bp-end {
+      $i: $i + 1;
+      $bp-list: join($bp-list, nth($bp-keys, $i));
+    }
+    @each $key in $bp-list {
+      $percentage: ( get-bp($key) - get-bp($bp-start) ) / $bp-distance;
+      $output: round-num( ( $value-distance * $percentage ) + $value-start );
+      @include breakpoint($key) {
+        @if $property == font-size {
+          @include fs($output);
+        } @else {
+          #{$property}: #{$output};
+        }
+      }
+    }
+  }
+}
+
+/* NO-SPREAD-VALUE Mixin
+ * Manually specify a series of values to be used across breakpoints in $breakpoints map
+ * - $property: CSS property name
+ * - $values: list of values (length must match length of $breakpoints map)
+ */
+@mixin no-spread-value($property, $values...) {
+  @if $property == font-size {
+    @include fs(nth($values, 1));
+  } @else {
+    #{$property}: nth($values, 1);
+  }
+  @if length($values) == length(map-keys($breakpoints)) {
+    @each $key in $bp-keys {
+      @include breakpoint($key) {
+        @if $property == font-size {
+          @include fs(nth($values, index($bp-keys, $key)));
+        } @else {
+          #{$property}: nth($values, index($bp-keys, $key));
+        }
+      }
+    }
+  } @else {
+    @warn 'You need as many values as there are breakpoints for this mixin.';
+  }
+}

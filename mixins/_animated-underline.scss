@@ -1,0 +1,22 @@
+@mixin animated-underline( $color: currentColor ) {
+  position: relative;
+
+  &::after {
+    border-bottom: 1px solid $color;
+    bottom: -1px;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    transform: scaleX(0);
+    transition: opacity .25s, transform .25s ease-out;
+  }
+
+  @include haf {
+    color: inherit;
+
+    &::after {
+      transform: none;
+    }
+  }
+}

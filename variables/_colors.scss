@@ -1,0 +1,73 @@
+/*
+ * Colors
+ *
+ * Variable names should describe what they contain.
+ * Use '$color-' + a color description in the variable name
+ * eg $color-blue instead of $color-primary.
+ * These are just a few examples to get you going. Change as needed
+ *
+ * Create additional variables for "meaningful" / semantic color labels
+ * and use the variables with color-specific names as the values.
+ */
+
+$colors: (
+  'red': #FF4136,
+  'blue': #0074D9,
+  'yellow': #FFDC00,
+  'orange': #FF851B,
+  'gray-dark': #010101,
+  'gray': #2D2D2D,
+  'gray-light': #787677,
+  'brown': #AE8746,
+  'tan': #CFAE5D,
+  'putty': #C8AB7D,
+  'gold': #C9B060,
+  'cream': #EEE580,
+  'casablanca': #F1B95C,
+  'shuttle-gray': #5B6770,
+  'rice-cake': #ECEAE4,
+  'bright-gray': #56585c,
+  'very-light-gray': #C7C7C8,
+  'black-pearl': #0D1823,
+  'wild-willow': #a0ce6c,
+  'cream-can': #f3ba53,
+  'silver-sand': #c2c5c7,
+  'oslo-gray': #94979a,
+  'iron': #d0d3d5,
+  'cararra': #f4f3f1,
+  'gray-chateau': #9fa1a3,
+  'alice-blue': #EDF1F5,
+  'white-smoke': #F4F4F4,
+  'golden-tanoi': #ffcc66,
+);
+
+$variations: (
+  light: (
+    function: lighten,
+    parameters: 15%
+  ),
+  dark: (
+    function: darken,
+    parameters: 10%
+  ),
+  fade: (
+    function: rgba,
+    parameters: .7
+  )
+);
+
+$color-white:           #FFF;
+$color-black:           #000;
+
+// Purpose Colors
+$base-font-color:       c(gray-dark);
+$action-color:          c(putty);
+$hover-color:           c(gold);
+$base-background-color: $color-white;
+
+$base-border-color:     c(gray-light);
+$base-border:           1px solid $base-border-color;
+$base-border-radius:    2px;
+
+$form-box-shadow:       inset 0 1px 3px rgba(c(gold), 0.25);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
